@@ -798,6 +798,24 @@ app.patch(
 );
 
 // ---- Division handbook documents ----
+
+ // ---- Division handbook documents ----
+
+// ADD THIS NEW PART
+app.get(
+  "/api/divisions/:key/documents",
+  ah(async (req, res) => {
+    const data = await loadData();
+
+    const documents = data.documents.filter(
+      (doc) => doc.divisionKey === req.params.key
+    );
+
+    res.json({ documents });
+  })
+);
+
+// KEEP YOUR EXISTING PART BELOW
 app.post(
   "/api/divisions/:key/documents",
   ah(async (req, res) => {
@@ -824,6 +842,7 @@ app.post(
     res.status(201).json({ ok: true });
   })
 );
+
 
 app.delete(
   "/api/divisions/:key/documents/:docId",
